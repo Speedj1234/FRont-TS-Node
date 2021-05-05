@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditActorsComponent } from './components/edit-actors/edit-actors.component';
 import{ActorsComponent} from './components/actors/actors.component'
+import{FourhofourComponent} from './components/fourhofour/fourhofour.component'
 
 
 
 const routes: Routes = [
+  {path: 'actors',  component: ActorsComponent},
    {path: 'edit-actors',  component: EditActorsComponent},
-   {path: 'actors',  component: ActorsComponent}
+   {path: 'edit-actors/:id',  component: EditActorsComponent},
+   {path: '',  component: ActorsComponent},
+   {path: 'not-found',  component: FourhofourComponent},
+   {path: '**',  redirectTo: 'not-found'},
 ];
 
 @NgModule({

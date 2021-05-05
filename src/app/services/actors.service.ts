@@ -52,4 +52,19 @@ public getAll(): Observable<Actor[]>
 }
 
 
+
+public getOneById(id: number): Observable<Actor>
+{
+  return this.server.get<Actor>('movies/actors/'+id).pipe(
+    map(res => res.length > 0 ? new Actor(res[0]): new Actor({})),
+    catchError(err=>
+     {
+       console.error(err);
+       return[];
+     } )
+  );
+}
+
+
+
 }

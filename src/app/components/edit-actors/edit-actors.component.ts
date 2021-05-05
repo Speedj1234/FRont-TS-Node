@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Actor} from'../../Models/actor.model';
 import{ControlContainer, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators, AbstractControl} from '@angular/forms';
-import{Router} from '@angular/router';
+import{ActivatedRoute, Router} from '@angular/router';
 import { ActorsService } from '../../services/actors.service';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
@@ -19,12 +19,22 @@ last_nameCtl!: FormControl;
 
 
 
-  constructor(private actorsService : ActorsService, private router: Router, private formBuilder: FormBuilder) 
+  constructor(private actorsService : ActorsService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) 
   {
     this.initForm();
    }
 
   ngOnInit(): void {
+
+    if (this.route.snapshot.params["id"])
+    {
+      this.actorsService.getOneById(this.route.snapshot.params["id"]).subscribe(m =>
+        {
+          const actor=m;
+          console.log(actor);
+        });
+     
+    }
 
 
   }

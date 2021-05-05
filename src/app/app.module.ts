@@ -11,12 +11,14 @@ import { ActorsComponent } from './components/actors/actors.component';
 import { EditActorsComponent } from './components/edit-actors/edit-actors.component';
 
 import{FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FourhofourComponent } from './components/fourhofour/fourhofour.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActorsComponent,
-    EditActorsComponent
+    EditActorsComponent,
+    FourhofourComponent
   ],
   imports: [
     BrowserModule,
