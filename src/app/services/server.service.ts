@@ -18,14 +18,22 @@ export class ServerService {
   }
 
 
-  public post(url:string, body:any)
+/*   public post(url:string, body:any)
   {
 
     return this.http.post(this.BASE_URL+url, JSON.stringify(body),{headers : new HttpHeaders({ 'Content-Type': 'application/json' })}
     ).subscribe(data => {
       console.log(data);
     });;
+  } */
+
+  public post<T>(url:string, body:T): Observable<any>
+  {
+
+    return this.http.post(this.BASE_URL+url,(body)
+    );
   }
+
 
 
 }
