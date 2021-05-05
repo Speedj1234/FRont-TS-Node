@@ -16,6 +16,8 @@ export class EditActorsComponent implements OnInit {
 actorForm!: FormGroup;
 first_nameCtl!: FormControl;
 last_nameCtl!: FormControl;
+isNew: boolean = true;
+actor!: Actor;
 
 
 
@@ -28,10 +30,11 @@ last_nameCtl!: FormControl;
 
     if (this.route.snapshot.params["id"])
     {
+      this.isNew = false;
       this.actorsService.getOneById(this.route.snapshot.params["id"]).subscribe(m =>
         {
-          const actor=m;
-          console.log(actor);
+          this.actor=m;
+          this.actorForm.patchValue(this.actor);
         });
      
     }
@@ -48,6 +51,7 @@ last_nameCtl!: FormControl;
       this.actorForm = this.formBuilder.group({
         first_name: this.first_nameCtl,
         last_name: this.last_nameCtl
+       
        
       });
 
@@ -70,15 +74,20 @@ last_nameCtl!: FormControl;
 
     const formVal = this.actorForm.value;
 
-    console.log ("first_name : "+ formVal.first_name + " last_name : " + formVal.last_name);
-    
-    const newActor= new Actor(formVal);
-      
-
-    this.actorsService.addActors(newActor).subscribe(m=>{});
+    if (this.isNew)
+    {
+      formVal.id = 0;
+      const newActor= new Actor(formVal);
+      this.actorsService.addActors(newActor).subscribe(m=>{});
+    }else
+    {
+      formVal.id = this.actor.id;
+      const newActor = new Actor(formVal);
+      this.actorsService.updateActor(newActor).subscribe();
+    }
 
     this.router.navigate(['/actors']);
-    console.log(newActor);
+    
   }
 
 

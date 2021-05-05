@@ -65,6 +65,35 @@ public getOneById(id: number): Observable<Actor>
   );
 }
 
+public updateActor(actor: Actor): Observable<Actor>
+
+{
+  return this.server.put<Actor>('movies/actors/'+actor.id, actor).pipe(
+    map(res => res.length > 0 ? new Actor(res[0]): new Actor({})),
+    catchError(err=>
+     {
+       console.error(err);
+       return[];
+     } )
+  );
+}
+
+
+public deleteActor(actor: Actor): Observable<Actor[]>
+
+{
+  return this.server.delete<Actor>('movies/actors/'+actor.id).pipe(
+    map(res => res.map((m: any) =>new Actor(m))),
+    catchError(err=>
+     {
+       console.error(err);
+       return[];
+     } )
+  );
+
+}
+
+
 
 
 }

@@ -14,8 +14,11 @@
              <td>{{actor.last_name}}</td>
              <td>
                 
-                 <button type="button" class="btn btn-primary">Edit</button>
-                 <button type="button" class="btn btn-info">Infos</button>
+                <button type="button" class="btn btn-info">Infos</button>
+                 <button type="button" class="btn btn-primary" (click)="edit(actor.id)">Edit</button>
+                 <button type="button" class="btn btn-danger"(click)="delete(actor)">Delete</button>
+               
+
                 
                 </td>
         </tr>

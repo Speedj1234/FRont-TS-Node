@@ -34,6 +34,20 @@ export class ServerService {
     );
   }
 
+  public put<T>(url:string, body:T): Observable<any>
+  {
+
+    return this.http.put(this.BASE_URL+url,(body)
+    );
+  }
+
+  public delete<T>(url:string): Observable<any>
+  {
+
+    return this.http.delete(this.BASE_URL+url);
+    
+  }
+
 
 
 }
