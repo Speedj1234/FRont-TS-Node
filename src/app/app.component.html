@@ -7,29 +7,33 @@
   </button>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      
+      <li class="nav-item" *ngIf="checkAuth()">
         <a class="nav-link" routerLink="actors">Actors</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="edit_user">edit user</a>
+
+      <li class="nav-item" *ngIf="checkAuth()">
+        <a class="nav-link" routerLink="users">users</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="products">products</a>
-      </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="!checkAuth()">
         <a class="nav-link" routerLink="auth">auth</a>
-      </li> -->
+      </li> 
+
       <li class="nav-item">
         <a class="nav-link" routerLink="edit-actors">add actors</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" routerLink="edit-users">add users</a>
+        <a class="nav-link" routerLink="edit-users">create account</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="users">users</a>
+      
+      <li class="nav-item" *ngIf="checkAuth()">
+        <a class="btn btn-danger" (click)="logout()">Logout</a>
       </li>
+   
+
 
     </ul>
   </div>
