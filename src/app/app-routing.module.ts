@@ -8,6 +8,8 @@ import{FourhofourComponent} from './components/fourhofour/fourhofour.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { MainComponent } from './components/main/main.component';
+import { MatActorsComponent } from './components/mat/actors/actors.component';
+import { ActorsContainerComponent } from './components/actors-container/actors-container.component';
 
 
 
@@ -16,7 +18,8 @@ import { MainComponent } from './components/main/main.component';
 const routes: Routes = [
   {path : 'auth', component: AuthComponent},
 
-  {path: 'actors', canActivate:[AuthGuardService], component: ActorsComponent},
+  {path: 'actors', canActivate:[AuthGuardService], component: ActorsContainerComponent},
+  
    {path: 'edit-actors',canActivate:[AuthGuardService], component: EditActorsComponent},
    {path: 'edit-actors/:id', canActivate:[AuthGuardService], component: EditActorsComponent},
 

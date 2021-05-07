@@ -1,0 +1,6 @@
+<div class="container">
+    <button class="btn btn-primary" (click)="onClick()"> {{ !isMatActive() ? "Activate" : "Disable"}} Material</button>
+    <app-actors *ngIf="!isMatActive()"></app-actors>
+    <app-mat-actors *ngIf="isMatActive()"></app-mat-actors>
+</div>
+

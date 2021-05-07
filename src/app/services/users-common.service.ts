@@ -20,7 +20,7 @@ export class UsersCommonService {
 public getOneByName(name: string): Observable<User | null>
 {
   return this.server.get<User>('users-common/name/'+name, false).pipe(
-    map(res => res.length > 0 ? new User(res[0]): new User({})),
+    map(res => res.length > 0 ? new User(res[0]): null),
     catchError(err=>
      {
        console.error(err);

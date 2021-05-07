@@ -3,7 +3,7 @@ import{HttpClient, HttpHeaders} from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Observable, of} from 'rxjs';
 import { Actor } from '../Models/actor.model';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, flatMap } from 'rxjs/operators';
 import { User } from '../Models/user.model';
 
 
@@ -118,7 +118,7 @@ export class ServerService {
     if (!token || this.jwt.isTokenExpired(token)) {
       const user = JSON.parse(sessionStorage.getItem('user') || '');
       return this.http.post<any>(this.BASE_URL + 'token', user).pipe(
-        map((data: any) => {
+        flatMap((data: any) => {
           if(data.success)
           {
             const token = data.token;

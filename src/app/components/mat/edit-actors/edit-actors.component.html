@@ -1,0 +1,27 @@
+<form id="actorForm" class="form" [formGroup]="actorForm" novalidate >
+    <mat-tab-group mat-stretch-tabs dynamicHeight>
+        <mat-tab label="General Data">
+            <div class="form">
+                <mat-form-field>
+
+                    <input matInput type="text" id="first_name" class="form-control" placeholder="firstname" [formControl]="firstnameCtl">
+                    <mat-error class="field-error" *ngIf="firstnameCtl.hasError('required')"> require </mat-error>
+
+                   </mat-form-field>
+
+                   <mat-form-field>
+
+                    <input matInput type="text" id="last_name" class="form-control" placeholder="lastname" [formControl]="lastnameCtl">
+                    <mat-error class="text-danger" *ngIf="lastnameCtl.hasError('required')"> require </mat-error>
+
+                </mat-form-field>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div class="footer">
+        <button type="submit" form="actorForm" class="btn btn-primary mr-2" 
+        [disabled]="actorForm.invalid" (click)="update()"> Save</button>
+    </div>
+
+</form>
