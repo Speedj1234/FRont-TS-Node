@@ -23,9 +23,16 @@ export class ServerService {
 
   constructor(private http: HttpClient) { }
 
-  public get<T>(url: string): Observable<any> // <T> : permet de passer un type quelconque
+  public get<T>(url: string, secure: boolean = true): Observable<any> // <T> : permet de passer un type quelconque
   {
-    return this.call(() =>this.http.get(this.BASE_URL + url));
+    if(secure)
+    {
+      return this.call(() =>this.http.get(this.BASE_URL + url));
+    } else
+    {
+      return this.http.get(this.BASE_URL + url);
+    }
+   
   }
 
 
@@ -38,12 +45,19 @@ export class ServerService {
     });;
   } */
 
-  public post<T>(url:string, body:T): Observable<any>
+  public post<T>(url:string, body:T, secure: boolean = true): Observable<any>
   {
-
-    return this.call(() =>this.http.post(this.BASE_URL + url, body));
-    
+    if(secure)
+    {
+      return this.call(() =>this.http.post(this.BASE_URL + url, body));
+    }else
+    {
+      return this.http.post(this.BASE_URL + url, body);
+    }
   }
+
+
+
 
   public put<T>(url:string, body:T): Observable<any>
   {

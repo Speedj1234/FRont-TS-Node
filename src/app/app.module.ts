@@ -20,6 +20,7 @@ import { UsersComponent } from './components/users/users.component';
 import { EditUsersComponent } from './components/edit-users/edit-users.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { MainComponent } from './components/main/main.component';
+import { UsersCommonService } from './services/users-common.service';
 
 export function tokenGetter() {
   return sessionStorage.getItem('id_token');
@@ -56,7 +57,8 @@ export function tokenGetter() {
     ServerService,
     UsersService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    UsersCommonService
     
   ],
   bootstrap: [AppComponent]

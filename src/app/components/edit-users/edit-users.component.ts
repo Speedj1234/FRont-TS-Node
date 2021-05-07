@@ -4,6 +4,7 @@ import{ControlContainer, FormBuilder, FormControl, FormGroup, NgForm, ValidatorF
 import{ActivatedRoute, Router} from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { UsersCommonService } from 'src/app/services/users-common.service';
 
 
 @Component({
@@ -22,7 +23,11 @@ user!:User;
 
 
 
-  constructor(private usersService : UsersService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) 
+  constructor(private usersService : UsersService, 
+    private router: Router, 
+    private route: ActivatedRoute, 
+    private formBuilder: FormBuilder,
+    private usersCommonService: UsersCommonService) 
   {
     this.initForm();
    }
@@ -43,10 +48,13 @@ user!:User;
 
   }
 
+  
+
+
   initForm(): void
   {
    
-      this.usernameCtl = this.formBuilder.control ('', [Validators.required, Validators.minLength(3)]);
+      this.usernameCtl = this.formBuilder.control ('', [Validators.required, Validators.minLength(3)], this.usernameExist());
       this.passwordCtl = this.formBuilder.control ('', [Validators.required, Validators.minLength(3)]);
       this.emailCtl = this.formBuilder.control ('', [Validators.required, Validators.email, Validators.minLength(7)]);  
 
@@ -60,6 +68,30 @@ user!:User;
 
   }
   
+  usernameExist(): any
+  {
+    var timeout: any;
+    return (ctl: FormControl) =>
+    {
+      clearTimeout(timeout);
+      const username = ctl.value;
+      return new Promise(resolve => {
+        timeout = setTimeout(() =>{
+          if(ctl.pristine)
+          {
+            resolve(null);
+          } else 
+          {
+            this.usersCommonService.getOneByName(username).subscribe(user => 
+              {
+                resolve(user && this.isNew ? { usernameExist: true } : null);
+              })
+          }
+        }, 300)
+      });
+    }
+  }
+
 
   onSubmit()
   {
@@ -70,7 +102,7 @@ user!:User;
     {
       formVal.id = 0;
       const newUser= new User(formVal);
-      this.usersService.addUsers(newUser).subscribe(m=>{});
+      this.usersCommonService.addUsers(newUser).subscribe(m=>{});
     }else
     {
       formVal.id = this.user.id;

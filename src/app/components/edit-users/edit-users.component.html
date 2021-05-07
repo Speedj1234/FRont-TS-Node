@@ -9,6 +9,7 @@
                 </label>
                 <input type="text" id="username" class="form-control" placeholder="username" [formControl]="usernameCtl">
                 <small class="text-danger" *ngIf="usernameCtl.hasError('required')"> require </small>
+                <small class="text-danger" *ngIf="usernameCtl.hasError('usernameExist')"> username already exist </small>
                 <small class="text-danger" *ngIf="usernameCtl.hasError('minlength')">
                 minimum length is {{usernameCtl.errors?.minlength.requiredLength}}</small>
             </div>

@@ -15,7 +15,7 @@ export class UsersService {
     
   }
 
-      addUsers(body: any):Observable <User[]>
+      addUsers(body: User):Observable <User[]>
       {
 
           
